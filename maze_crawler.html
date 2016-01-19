@@ -44,6 +44,16 @@
                     cells[i].push(rect);
                 }
             }
+
+            var x = 1;
+            var y = 2;
+            var dir = 3
+            var dirs = [0, 90, 180, 270];
+            var nav = new fabric.Triangle({
+                width: cell_width, height: cell_width, fill: 'red', left: x * cell_width, top: y * cell_width
+            });
+            nav.angle = dirs[dir];
+            maze.add(nav);
         </script>
     </body>
 </html>
