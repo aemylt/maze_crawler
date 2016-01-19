@@ -13,10 +13,25 @@
             var cells_wide = 10;
             var maze = new fabric.Canvas('maze');
             var cells = [];
-            for (i = 0; i < maze_width; i = i + cell_width) {
-                for (j = 0; j < maze_width; j = j + cell_width) {
-                    var rect = new fabric.Rect({fill:'red', height:cell_width, width:cell_width, left:i, top:j});
-                    maze.add(rect);
+            var obstacles = [[false, false, false, false, false, false, false, false, false, false],
+                            [false, false, false, false, false, false, false, false, false, false],
+                            [false, false, false, false, false, false, false, false, false, false],
+                            [false, false, false, true, false, false, false, false, false, false],
+                            [false, false, false, false, false, false, false, false, false, false],
+                            [false, false, false, false, false, false, false, false, false, false],
+                            [false, false, false, false, false, false, false, false, false, false],
+                            [false, false, false, false, false, false, false, false, false, false],
+                            [false, false, false, false, false, false, false, false, false, false],
+                            [false, false, false, false, false, false, false, false, false, false]];
+            for (i = 0; i < cells_wide; i = i + 1) {
+                cells.push([]);
+                for (j = 0; j < cells_wide; j = j + 1) {
+                    var rect = new fabric.Rect({height:cell_width, width:cell_width, left:i * cell_width, top:j * cell_width});
+                    if (obstacles[i][j]) {
+                        rect.fill = 'grey';
+                    } else {
+                        rect.fill = 'blue';
+                    }
                     rect.hasControls = false;
                     rect.lockMovementX = true;
                     rect.lockMovementY = true;
@@ -25,11 +40,10 @@
                     rect.lockScalingX = true;
                     rect.lockScalingY = true;
                     rect.lockUniScaling = true;
-                    cells.push(rect);
+                    maze.add(rect);
+                    cells[i].push(rect);
                 }
             }
-            cells[5].set({fill:'white'});
-            maze.renderAll();
         </script>
     </body>
 </html>
