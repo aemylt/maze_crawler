@@ -12,6 +12,8 @@
             var cell_width = 50;
             var cells_wide = 10;
             var maze = new fabric.Canvas('maze');
+            maze.hoverCursor = 'default';
+            maze.moveCursor = 'default';
             var cells = [];
             var obstacles = [[false, false, false, false, false, false, false, false, false, false],
                             [false, false, false, false, false, false, false, false, false, false],
@@ -54,10 +56,34 @@
             var dir = 3
             var dirs = [0, 90, 180, 270];
             var nav = new fabric.Triangle({
-                width: cell_width, height: cell_width, fill: 'red', left: x * cell_width, top: y * cell_width
+                originX:'center', originY:'center', width: cell_width, height: cell_width, fill: 'red', left: x * cell_width + cell_width/2, top: y * cell_width + cell_width/2
             });
             nav.angle = dirs[dir];
+            nav.hasControls = false;
+            nav.lockMovementX = true;
+            nav.lockMovementY = true;
+            nav.lockRotation = true;
+            nav.lockScalingFlip = true;
+            nav.lockScalingX = true;
+            nav.lockScalingY = true;
+            nav.lockUniScaling = true;
             maze.add(nav);
+
+            function turn(direction) {
+                if (direction) {
+                    dir = (dir + 1) % 4;
+                } else if (dir > 0) {
+                    dir = dir - 1;
+                } else {
+                    dir = 3;
+                }
+                maze.renderAll();
+                nav.animate('angle', dirs[dir], {
+                    onChange: maze.renderAll.bind(maze)
+                });
+            }
+
+            turn(true);
         </script>
     </body>
 </html>
