@@ -23,12 +23,16 @@
                             [false, false, false, false, false, false, false, false, false, false],
                             [false, false, false, false, false, false, false, false, false, false],
                             [false, false, false, false, false, false, false, false, false, false]];
+            var goal_x = 5;
+            var goal_y = 9;
             for (i = 0; i < cells_wide; i = i + 1) {
                 cells.push([]);
                 for (j = 0; j < cells_wide; j = j + 1) {
                     var rect = new fabric.Rect({height:cell_width, width:cell_width, left:i * cell_width, top:j * cell_width});
                     if (obstacles[i][j]) {
                         rect.fill = 'grey';
+                    } else if ((i === goal_x) && (j === goal_y)) {
+                        rect.fill = 'green';
                     } else {
                         rect.fill = 'blue';
                     }
