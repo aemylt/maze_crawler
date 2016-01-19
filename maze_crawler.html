@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Maze Navigation Demo</title>
         <meta charset="utf-8"/>
+        <script type="text/javascript" src="http://fabricjs.com/lib/fabric.js"></script>
+    </head>
+    <body>
+        <canvas id="maze" width="500" height="500" style="border:1px solid #ccc"></canvas>
         <script type="application/javascript">
-            function draw() {
-                var canvas = document.getElementById("maze");
-                var ctx = canvas.getContext("2d");
-                ctx.strokeStyle = "black";
-                var cell_width = 50;
-                for (var i = 0; i <= 500; i = i + cell_width) {
-                    for (var j = 0; j <= 500; j = j + cell_width) {
-                        ctx.strokeRect(i, j, cell_width, cell_width);
-                    }
+            var maze_width = 500;
+            var cell_width = 50;
+            var cells_wide = 10;
+            var maze = new fabric.Canvas('maze');
+            var cells = [];
+            for (i = 0; i < maze_width; i = i + cell_width) {
+                for (j = 0; j < maze_width; j = j + cell_width) {
+                    var rect = new fabric.Rect({fill:'red', height:cell_width, width:cell_width, left:i, top:j});
+                    maze.add(rect);
+                    rect.hasControls = false;
+                    rect.lockMovementX = true;
+                    rect.lockMovementY = true;
+                    rect.lockRotation = true;
+                    rect.lockScalingFlip = true;
+                    rect.lockScalingX = true;
+                    rect.lockScalingY = true;
+                    rect.lockUniScaling = true;
+                    cells.push(rect);
                 }
             }
+            cells[5].set({fill:'white'});
+            maze.renderAll();
         </script>
-    </head>
-    <body onload="draw();">
-        <canvas id="maze" width="500" height="500"></canvas>
     </body>
 </html>
