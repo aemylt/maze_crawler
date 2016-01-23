@@ -27,6 +27,8 @@
                             [false, false, false, false, false, false, false, false, false, false]];
             var goal_x = 5;
             var goal_y = 9;
+            var start_x = 1;
+            var start_y = 2;
             for (i = 0; i < cells_wide; i = i + 1) {
                 cells.push([]);
                 for (j = 0; j < cells_wide; j = j + 1) {
@@ -35,6 +37,8 @@
                         rect.fill = 'grey';
                     } else if ((i === goal_x) && (j === goal_y)) {
                         rect.fill = 'green';
+                    } else if ((i === start_x) && (j === start_y)) {
+                        rect.fill = 'yellow';
                     } else {
                         rect.fill = 'blue';
                     }
@@ -43,8 +47,8 @@
                 }
             }
 
-            var x = 1;
-            var y = 2;
+            var x = start_x;
+            var y = start_y;
             var dir = 0;
             var dirs = [0, 90, 180, 270];
             var nav = new fabric.Triangle({
@@ -73,7 +77,9 @@
                 nav.animate(next.change, next.difference, {
                     onChange: maze.renderAll.bind(maze),
                     onComplete: function() {
-                        move(moves);
+                        move();
+                        cells[Math.floor(nav.left / cell_width)][Math.floor(nav.top / cell_width)].fill = 'yellow';
+                        maze.renderAll.bind(maze);
                     }
                 });
             }
