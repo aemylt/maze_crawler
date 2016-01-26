@@ -15,19 +15,19 @@
             maze.hoverCursor = 'default';
             maze.moveCursor = 'default';
             var cells = [];
-            var obstacles = [[false, false, false, false, false, false, false, false, false, false],
-                            [false, false, false, false, false, false, false, false, false, false],
-                            [false, false, false, false, false, false, false, false, false, false],
-                            [false, false, false, true, false, false, false, false, false, false],
-                            [false, false, false, false, false, false, false, false, false, false],
-                            [false, false, false, false, false, false, false, false, false, false],
-                            [false, false, false, false, false, false, false, false, false, false],
-                            [false, false, false, false, false, false, false, false, false, false],
-                            [false, false, false, false, false, false, false, false, false, false],
-                            [false, false, false, false, false, false, false, false, false, false]];
-            var goal_x = 5;
+            var obstacles = [[false, false, false, false, true, true, false, true, false, false],
+                            [true, true, false, false, false, false, false, false, false, true],
+                            [true, false, false, true, true, true, true, false, false, false],
+                            [true, true, false, true, true, true, true, false, true, false],
+                            [true, true, false, true, true, true, true, false, false, true],
+                            [false, false, false, false, false, false, false, false, true, false],
+                            [true, true, true, false, true, false, true, false, false, false],
+                            [false, false, false, false, true, true, true, true, true, true],
+                            [true, true, true, false, false, false, false, false, false, false],
+                            [true, true, false, false, true, false, true, true, false, false]];
+            var goal_x = 3;
             var goal_y = 9;
-            var start_x = 1;
+            var start_x = 3;
             var start_y = 2;
             for (i = 0; i < cells_wide; i = i + 1) {
                 cells.push([]);
