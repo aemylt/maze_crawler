@@ -27,8 +27,9 @@
                             [true, true, false, false, true, false, true, true, false, false]];
             var goal_x = 3;
             var goal_y = 9;
-            var start_x = 3;
-            var start_y = 2;
+            var start_x = 5;
+            var start_y = 3;
+            var start_dir = 0;
             for (i = 0; i < cells_wide; i = i + 1) {
                 cells.push([]);
                 for (j = 0; j < cells_wide; j = j + 1) {
@@ -49,10 +50,9 @@
 
             var x = start_x;
             var y = start_y;
-            var dir = 0;
-            var dirs = [0, 90, 180, 270];
+            var dir = start_dir;
             var nav = new fabric.Triangle({
-                originX:'center', originY:'center', width: cell_width, height: cell_width, fill: 'red', left: x * cell_width + cell_width/2, top: y * cell_width + cell_width/2, angle:dirs[dir], hasControls:false, lockMovementX:true, lockMovementY:true, lockRotation:true, lockScalingFlip:true, lockScalingX:true, lockScalingY:true, lockUniScaling:true
+                originX:'center', originY:'center', width: cell_width, height: cell_width, fill: 'red', left: x * cell_width + cell_width/2, top: y * cell_width + cell_width/2, angle:dir * 90, hasControls:false, lockMovementX:true, lockMovementY:true, lockRotation:true, lockScalingFlip:true, lockScalingX:true, lockScalingY:true, lockUniScaling:true
             });
             maze.add(nav);
             var angles = [['+=0', '+=90', '+=180', '-=90'], ['-=90', '+=0', '+=90', '+=180'], ['+=180', '-=90', '+=0', '+=90'], ['+=90', '+=180', '-=90', '+=0']];
@@ -76,6 +76,7 @@
                 next = moves.shift()
                 nav.animate(next.change, next.difference, {
                     onChange: maze.renderAll.bind(maze),
+                    duration:200,
                     onComplete: function() {
                         move();
                         cells[Math.floor(nav.left / cell_width)][Math.floor(nav.top / cell_width)].fill = 'yellow';
@@ -84,24 +85,30 @@
                 });
             }
 
-            walk();
-            turn(1);
-            turn(0);
-            turn(2);
-            turn(0);
-            turn(3);
-            turn(0);
-            turn(1);
-            walk();
-            turn(2);
-            turn(1);
-            turn(3);
-            turn(1);
-            turn(2);
-            walk();
-            turn(3);
-            walk();
-            turn(2);
+            for (var i = 0; i < 5; i++) {
+                walk();
+                turn(3);
+                walk();
+                walk();
+                walk();
+                walk();
+                turn(2);
+                walk();
+                walk();
+                walk();
+                walk();
+                walk();
+                turn(1);
+                walk();
+                walk();
+                walk();
+                walk();
+                turn(0);
+                walk();
+                walk();
+                walk();
+                walk();
+            }
 
             move();
         </script>
