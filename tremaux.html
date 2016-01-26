@@ -8,14 +8,6 @@
     <body>
         <canvas id="maze" width="500" height="500" style="border:1px solid #ccc"></canvas>
         <script type="application/javascript">
-
-            document.body.onkeyup = function(e){
-                if(e.keyCode == 32){
-                    window.location = "file:///C:/Users/Dominic/Documents/University/PhD/PhD%20First%20Year/maze_crawler/tremaux.html"
-                }
-                return false;
-            }
-
             var maze_width = 500;
             var cell_width = 50;
             var cells_wide = 10;
@@ -77,6 +69,14 @@
                 moves.push(walks[dir]);
             }
 
+            function back() {
+                var reverse = dir - 2;
+                if (reverse < 0) {
+                    reverse += 4;
+                }
+                moves.push(walks[reverse]);
+            }
+
             function move() {
                 if (moves.length === 0) {
                     return;
@@ -86,37 +86,68 @@
                     onChange: maze.renderAll.bind(maze),
                     duration:200,
                     onComplete: function() {
-                        move();
                         cells[Math.floor(nav.left / cell_width)][Math.floor(nav.top / cell_width)].fill = 'black';
                         maze.renderAll.bind(maze);
+                        move();
                     }
                 });
             }
 
-            for (var i = 0; i < 5; i++) {
-                walk();
-                turn(3);
-                walk();
-                walk();
-                walk();
-                walk();
-                turn(2);
-                walk();
-                walk();
-                walk();
-                walk();
-                walk();
-                turn(1);
-                walk();
-                walk();
-                walk();
-                walk();
-                turn(0);
-                walk();
-                walk();
-                walk();
-                walk();
-            }
+            walk();
+            turn(3);
+            walk();
+            walk();
+            walk();
+            walk();
+            turn(2);
+            walk();
+            walk();
+            walk();
+            walk();
+            walk();
+            turn(1);
+            walk();
+            walk();
+            walk();
+            walk();
+            turn(0);
+            walk();
+            walk();
+            walk();
+            walk();
+            back();
+            back();
+            turn(1);
+            walk();
+            back();
+            turn(0);
+            back();
+            back();
+            turn(1);
+            walk();
+            turn(2);
+            walk();
+            walk();
+            turn(3);
+            walk();
+            back();
+            turn(2);
+            back();
+            back();
+            turn(1);
+            back();
+            back();
+            turn(2);
+            walk();
+            back();
+            turn(1);
+            back();
+            back();
+            turn(2);
+            walk();
+            walk();
+            turn(1);
+            walk();
 
             move();
         </script>
