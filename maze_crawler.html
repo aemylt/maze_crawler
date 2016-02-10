@@ -8,10 +8,11 @@
     <body>
         <canvas id="maze" width="750" height="750" style="border:1px solid #ccc"></canvas>
         <script type="application/javascript">
-
             document.body.onkeyup = function(e){
-                if(e.keyCode == 34){
+                if (e.keyCode == 34){
                     window.location = "./tremaux.html"
+                } else if (e.keyCode == 33) {
+                    window.location = "./wall_e.html"
                 }
                 return false;
             }

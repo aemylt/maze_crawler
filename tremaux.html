@@ -8,6 +8,12 @@
     <body>
         <canvas id="maze" width="750" height="750" style="border:1px solid #ccc"></canvas>
         <script type="application/javascript">
+            document.body.onkeyup = function(e){
+                if (e.keyCode == 33) {
+                    window.location = "./maze_crawler.html"
+                }
+                return false;
+            }
             var maze_width = 750;
             var cells_wide = 10;
             var cell_width = maze_width / cells_wide;
