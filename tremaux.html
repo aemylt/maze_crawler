@@ -6,11 +6,11 @@
         <script type="text/javascript" src="http://fabricjs.com/lib/fabric.js"></script>
     </head>
     <body>
-        <canvas id="maze" width="900" height="900" style="border:1px solid #ccc"></canvas>
+        <canvas id="maze" width="750" height="750" style="border:1px solid #ccc"></canvas>
         <script type="application/javascript">
-            var maze_width = 900;
-            var cell_width = 90;
+            var maze_width = 750;
             var cells_wide = 10;
+            var cell_width = maze_width / cells_wide;
             var maze = new fabric.Canvas('maze');
             maze.hoverCursor = 'default';
             maze.moveCursor = 'default';
@@ -25,7 +25,7 @@
                             [false, false, false, false, true, true, true, true, true, true],
                             [true, true, true, false, false, false, false, false, false, false],
                             [true, true, false, false, true, false, true, true, false, false]];
-            var goal_x = 3;
+            var goal_x = 0;
             var goal_y = 9;
             var start_x = 5;
             var start_y = 3;
@@ -56,7 +56,7 @@
             });
             maze.add(nav);
             var angles = [['+=0', '+=90', '+=180', '-=90'], ['-=90', '+=0', '+=90', '+=180'], ['+=180', '-=90', '+=0', '+=90'], ['+=90', '+=180', '-=90', '+=0']];
-            var walks = [{change:'top', difference:'-=90'}, {change:'left', difference:'+=90'}, {change:'top', difference:'+=90'}, {change:'left', difference:'-=90'}]
+            var walks = [{change:'top', difference:'-=' + cell_width}, {change:'left', difference:'+=' + cell_width}, {change:'top', difference:'+=' + cell_width}, {change:'left', difference:'-=' + cell_width}]
 
             var moves = [];
 
@@ -147,6 +147,21 @@
             walk();
             walk();
             turn(1);
+            walk();
+            back();
+            turn(2);
+            back();
+            back();
+            turn(1);
+            back();
+            turn(2);
+            walk();
+            turn(1);
+            walk();
+            back();
+            turn(3);
+            walk();
+            turn(2);
             walk();
 
             move();
